@@ -97,6 +97,10 @@ public class RepositoryRestMvConfigurationIntegrationTests {
 		context.getBean("halJacksonHttpMessageConverter", HttpMessageConverter.class);
 		ObjectMapper mapper = context.getBean("halObjectMapper", ObjectMapper.class);
 		mapper.writeValueAsString(new RepositoryLinksResource());
+
+		// Verify HAL-FORMS setup
+		ObjectMapper mapper2 = context.getBean("halFormsObjectMapper", ObjectMapper.class);
+		mapper2.writeValueAsString(new RepositoryLinksResource());
 	}
 
 	@Test // DATAREST-271
@@ -159,6 +163,7 @@ public class RepositoryRestMvConfigurationIntegrationTests {
 
 		assertThat(converters.get(0).getSupportedMediaTypes()).contains(MediaTypes.HAL_JSON);
 		assertThat(converters.get(1).getSupportedMediaTypes()).contains(RestMediaTypes.SCHEMA_JSON);
+		assertThat(converters.get(2).getSupportedMediaTypes()).contains(MediaTypes.HAL_FORMS_JSON);
 	}
 
 	@Test // DATAREST-424
@@ -172,6 +177,7 @@ public class RepositoryRestMvConfigurationIntegrationTests {
 
 		assertThat(converters.get(0).getSupportedMediaTypes()).contains(RestMediaTypes.SCHEMA_JSON);
 		assertThat(converters.get(1).getSupportedMediaTypes()).contains(MediaTypes.HAL_JSON);
+		assertThat(converters.get(2).getSupportedMediaTypes()).contains(MediaTypes.HAL_FORMS_JSON);
 	}
 
 	@Test // DATAREST-431, DATACMNS-626
